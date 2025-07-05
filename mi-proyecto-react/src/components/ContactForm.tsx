@@ -1,5 +1,6 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react';
-import styles from './ContactForm.module.css';
+import React, { useState, ChangeEvent, FormEvent } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
+import styles from "./ContactForm.module.css";
 
 interface FormData {
   nombre: string;
@@ -8,42 +9,61 @@ interface FormData {
   mensaje: string;
 }
 
+const RECAPTCHA_SITE_KEY = "6LdwZ2srAAAAAGdBDgheRfm2j5WldYcO1gq_RP5Z"; // Reemplaza con tu clave pública
+
 const ContactForm: React.FC = () => {
   const [form, setForm] = useState<FormData>({
-    nombre: '',
-    correo: '',
-    telefono: '',
-    mensaje: '',
+    nombre: "",
+    correo: "",
+    telefono: "",
+    mensaje: "",
   });
 
-  const [status, setStatus] = useState<{ message: string; error?: boolean } | null>(null);
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+  const [status, setStatus] = useState<{
+    message: string;
+    error?: boolean;
+  } | null>(null);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setForm({
       ...form,
       [e.target.name]: e.target.value,
     });
   };
 
+  const handleRecaptcha = (token: string | null) => {
+    setRecaptchaToken(token);
+  };
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setStatus({ message: 'Enviando...' });
+
+    if (!recaptchaToken) {
+      setStatus({ message: "Por favor confirma el reCAPTCHA", error: true });
+      return;
+    }
+
+    setStatus({ message: "Enviando..." });
 
     try {
-      const res = await fetch('http://localhost:4000/api/contacto', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+      const res = await fetch("http://localhost:4000/api/contacto", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, recaptchaToken }),
       });
 
       if (res.ok) {
-        setStatus({ message: 'Mensaje enviado con éxito' });
-        setForm({ nombre: '', correo: '', telefono: '', mensaje: '' });
+        setStatus({ message: "Mensaje enviado con éxito" });
+        setForm({ nombre: "", correo: "", telefono: "", mensaje: "" });
+        setRecaptchaToken(null);
       } else {
-        setStatus({ message: 'Error al enviar mensaje', error: true });
+        setStatus({ message: "Error al enviar mensaje", error: true });
       }
     } catch (error) {
-      setStatus({ message: 'Error de conexión', error: true });
+      setStatus({ message: "Error de conexión", error: true });
     }
   };
 
@@ -95,11 +115,38 @@ const ContactForm: React.FC = () => {
           rows={5}
         />
 
+        <label className={styles.checkboxContainer}>
+          <input type="checkbox" required name="terminos" />
+          <span>
+            Acepto el{" "}
+            <a
+              href="/aviso-de-privacidad"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Aviso de privacidad
+            </a>{" "}
+            y los{" "}
+            <a
+              href="/terminos-y-condiciones"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Términos y condiciones.
+            </a>
+          </span>
+        </label>
+
+        {/* reCAPTCHA */}
+        <div className={styles.recaptcha}>
+          <ReCAPTCHA sitekey={RECAPTCHA_SITE_KEY} onChange={handleRecaptcha} />
+        </div>
+
         <button type="submit">Enviar</button>
       </form>
 
       {status && (
-        <p className={`${styles.status} ${status.error ? styles.error : ''}`}>
+        <p className={`${styles.status} ${status.error ? styles.error : ""}`}>
           {status.message}
         </p>
       )}

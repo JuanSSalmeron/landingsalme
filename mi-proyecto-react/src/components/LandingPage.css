@@ -1,0 +1,150 @@
+.landing-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    color: rgba(255, 255, 255, 0.87);
+  }
+  
+  .landing-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .landing-header nav a {
+    margin-left: 1.5rem;
+    color: #646cff;
+    font-weight: 500;
+  }
+  
+  .landing-hero {
+    background: linear-gradient(120deg, #1a1a1a, #242424);
+    padding: 4rem 2rem;
+    border-radius: 12px;
+    text-align: center;
+  }
+  
+  .landing-hero h2 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .landing-hero p {
+    margin-bottom: 1rem;
+    color: #ccc;
+  }
+  
+  .landing-hero button {
+    background-color: #646cff;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.6rem;
+    font-size: 1rem;
+    border-radius: 6px;
+  }
+  
+  .landing-section {
+    margin-top: 4rem;
+  }
+  
+  .landing-section h3 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #646cff;
+    display: inline-block;
+    padding-bottom: 0.2rem;
+  }
+  
+  .landing-cards {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .landing-card {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    width: 280px;
+    padding: 1rem;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .landing-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(255, 255, 255, 0.1);
+  }
+  
+  .landing-card img {
+    width: 100%;
+    height: 125px; /* Aumenta de 160px a 220px o más */
+    border-radius: 6px;
+    margin-bottom: 1rem;
+  }
+  
+  
+  .landing-card h4 {
+    margin: 0.5rem 0;
+    color: #fff;
+  }
+  
+  .landing-card p {
+    font-size: 0.9rem;
+    color: #bbb;
+  }
+  .benefits-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: #ffffff;
+  }
+  
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2rem;
+  }
+  
+  .benefit-card {
+    background-color: #3b3b9c;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .benefit-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.08);
+  }
+  
+  .benefit-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  
+  .benefit-card h4 {
+    font-size: 1.2rem;
+    color: #ffffff;
+    margin: 0.5rem 0;
+  }
+  
+  .benefit-card p {
+    font-size: 0.95rem;
+    color: #bbbbbb;
+  }
+  
+  
+  .landing-footer {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #333;
+    color: #aaa;
+  }
+  
