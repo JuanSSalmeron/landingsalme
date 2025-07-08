@@ -3,7 +3,6 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import nodemailer from 'nodemailer';
-
 import leadRoutes from './routes/leads.js';
 import authRoutes from './routes/auth.js';
 import Lead from './models/Lead.js';
