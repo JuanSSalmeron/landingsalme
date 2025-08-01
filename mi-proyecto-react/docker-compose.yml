@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  backend:
+    build: ./Backend
+    container_name: backend_service
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./Backend:/app
+    environment:
+      - NODE_ENV=development
+
+  dashboard:
+    build: ./frontend/dashboard-crm
+    container_name: dashboard_service
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/dashboard-crm:/app
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - backend
+
+  landing:
+    build:
+      context: ./src
+      dockerfile: Dockerfile  
+    container_name: landing_service
+    ports:
+      - "5173:5173"
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - backend
