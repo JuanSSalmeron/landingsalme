@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: backend_service
+    ports:
+      - "9999:4000"            # Cambia si usas otro puerto
+    volumes:
+      - .:/app                 # Para desarrollo en caliente (opcional)
+      - /app/node_modules      # Previene conflictos
+    environment:
+      - NODE_ENV=development
+    command: node index.js     # Aquí usamos directamente node index.js

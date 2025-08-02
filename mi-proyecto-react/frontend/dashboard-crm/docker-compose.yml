@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  dashboard_crm:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: dashboard_service
+    ports:
+      - "8080:80"  # Puerto local:contenedor

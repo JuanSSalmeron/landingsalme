@@ -51,7 +51,7 @@ const ContactForm: React.FC = () => {
     setStatus({ message: "Enviando..." });
 
     try {
-      const res = await fetch("http://localhost:4000/api/contacto", {
+      const res = await fetch("http://137.184.58.132:9999/api/contacto", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...form, recaptchaToken }),
